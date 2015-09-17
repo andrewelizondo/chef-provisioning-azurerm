@@ -5,3 +5,4 @@ Gemfile.lock
 /docs/examples
 /provision/recipes
 coverage
+*.log

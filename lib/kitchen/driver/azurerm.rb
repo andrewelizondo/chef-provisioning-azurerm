@@ -31,6 +31,13 @@ module Kitchen
         storage_account.set_or_return(:location, 'West Europe', kind_of: String)
         puts storage_account.inspect
         storage_account.run_action(:create)
+
+        public_ip_address_name = "ktchnpip#{SecureRandom.hex(6)}"
+        public_ip_address = Chef::Resource::AzurePublicIPAddress.new(public_ip_address_name, run_context)
+        public_ip_address.set_or_return(:resource_group, state[:azure_resource_group_name], kind_of: String)
+        public_ip_address.set_or_return(:location, 'West Europe', kind_of: String)
+        puts public_ip_address.inspect
+        public_ip_address.run_action(:create)
       end
 
       def destroy(state)
